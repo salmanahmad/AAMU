@@ -14,6 +14,11 @@
         
         var menu_open = false
         
+        function close_all_menus() {
+          $this.find("ul").hide();
+          $this.find(".selected").removeClass("selected");
+        }
+        
         function open_menu(item) {
           $(item).siblings("ul.smenu-menu").hide()
           
@@ -53,6 +58,12 @@
         function collapse_menu(item) {
           close_menu(item);
         }
+        
+        $(document).click(function(event) {
+          if ($(event.target).parents(".smenu-menu-bar").size() == 0) {
+            close_all_menus();
+          }
+        });
         
         $this.find("ul.smenu-menu li").each(function() {
           
