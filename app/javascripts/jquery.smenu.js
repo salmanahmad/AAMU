@@ -4,11 +4,14 @@
     init : function(options) {
       
       var settings = $.extend({
-        'delay-time' : 0
+        aamu : false,
+        delay_time : 0,
       }, options);
       
       return this.each(function() {
-         
+        
+        
+        
         var $this = $(this);
         var data = $this.data('smenu');
         
@@ -17,6 +20,7 @@
         function close_all_menus() {
           $this.find("ul").hide();
           $this.find(".selected").removeClass("selected");
+          menu_open = false;
         }
         
         function open_menu(item) {
@@ -40,7 +44,7 @@
         function close_menu(item) {
           $(item).siblings("ul.smenu-menu").hide()
           $(item).next("ul.smenu-menu").hide();
-          $(item).removeClass("selected")
+          $(item).removeClass("selected");
         }
         
         
@@ -60,9 +64,11 @@
         }
         
         $(document).click(function(event) {
-          if ($(event.target).parents(".smenu-menu-bar").size() == 0) {
+          
+          if($this.find($(event.target)).size() == 0) {
             close_all_menus();
           }
+          
         });
         
         $this.find("ul.smenu-menu li").each(function() {

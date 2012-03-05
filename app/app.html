@@ -14,7 +14,12 @@
 
     <script type="text/javascript" charset="utf-8">
       $(function() {
-        $(".smenu-menu-bar").smenu();
+        
+        var menu_html = $(".normal-menu").html()
+        $(".aamu-menu").html(menu_html)
+        
+        $(".normal-menu .smenu-menu-bar").smenu();
+        $(".aamu-menu .smenu-menu-bar").smenu({aamu:true});
       })
     </script>
   </head>
@@ -26,7 +31,10 @@
         <h1>AAMU Menu Demonstration</h1>
       </div>
       <div id="content">
-        <div class="menu-control">
+        
+        <h2>Normal Menu</h2>
+        
+        <div class="normal-menu">
           <ul class="smenu-menu-bar">
             <li class="smenu-menu-item"><a>Finder</a></li>
             <ul class="smenu-menu">
@@ -107,7 +115,9 @@
           </ul>
         </div>
         
+        <h2>AAMU Menu</h2>
         
+        <div class="aamu-menu"></div>
         
       </div>
       <div id="footer">
