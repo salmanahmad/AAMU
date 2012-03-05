@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>AAMU Experiment</title>
+    
+    <link rel="stylesheet" href="stylesheets/page.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/smenu.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    
+    <script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="javascripts/jquery.smenu.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <script type="text/javascript" charset="utf-8">
+      
+      function randomNumber(start, range) {
+        return Math.floor(Math.random() * range) + start;
+      }
+      
+      function random() {
+        return randomNumber(5, 3)
+      }
+      
+      function generateMenuDepth(depth, items) {
+        
+        if(depth == 0) {
+          return
+        }
+        
+        var selected_items = [];
+        var have_picked_one = false;
+        
+        $(items).each(function() {
+          if(Math.random() <= 0.5) {
+            have_picked_one = true
+            selected_items.push($(this))
+            //$(this).css("background-color", "red")
+          }
+        })
+        
+        if(!have_picked_one) {
+          var index = randomNumber(0, $(items).size())
+          var item = $(items)[index]
+          selected_items.push($(item))
+          //$(item).css("background-color", "red")
+        }
+        
+        for(var i in selected_items) {
+          var menu = $('<ul class="smenu-menu"></ul>')
+          var item = selected_items[i]
+          var count = random();
+          for(var j = 0; j < count; j++) {
+            var li = $('<li><a>Item ' + (j + 1) + '</a></li>')
+            $(li).appendTo(menu);
+          }
+          
+          $(menu).insertAfter(item)
+          generateMenuDepth(depth - 1, $(menu).children())
+          
+        }
+      }
+      
+      function createMenu(depth) {
+        var menu = $('<ul class="smenu-menu-bar"></ul>');
+        
+        var count = random();        
+        
+        for (var i = 0; i < count; i++) {
+          var item = $('<li><a>Item ' + (i + 1) + '</a></li>')
+          $(item).appendTo(menu);
+        }
+        
+        $(".menu").html(menu)
+        generateMenuDepth(depth, $(menu).children());
+        createMenuPath($(menu))
+      }
+      
+      function createMenuPath(menu) {
+        
+        var size = $(menu).children("ul").size();
+        
+        
+        if(size == 0) {
+          var size = $(menu).children("li").size();
+          var index = randomNumber(0, size)
+          var item = $(menu).children("li")[index]
+          $(item).css("background-color", "red")
+          
+        } else {
+          var index = randomNumber(0, size)
+          var menu = $(menu).children("ul")[index]
+          $(menu).prev("li").css("background-color", "green")
+          createMenuPath($(menu))
+        }
+        
+      }
+      
+      $(function() {
+        
+        createMenu(3);
+        
+        $(".menu .smenu-menu-bar").smenu();
+      })
+    </script>
+  </head>
+  <body>
+    
+    
+    <div id="page">
+      <div id="header">
+        <h1>AAMU - Experiment</h1>
+      </div>
+      <div id="content">
+        
+        <h2>Instructions</h2>
+        
+        <p>You will be given a series of menu navigation tasks. During these tasks you will be asked to follow a trail of green menu items until you find a red menu item. When you find the red menu item, click on it.</p>
+        
+        <p>Try to complete each task as quickly and accurately as possible.</p>
+        
+        <p>You can practice using the interface below. These tasks will not be recorded. Once you are comfortable with the interface, click the "Begin Experiment" button to start.</p>
+        
+        <h2>Interface</h2>
+        
+        <div class="menu"></div>
+        
+      </div>
+      <div id="footer">
+        By: Salman Ahmad
+      </div>
+    </div>
+  </body>
+</html>

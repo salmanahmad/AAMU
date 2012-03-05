@@ -50,7 +50,16 @@ body {
 }
 
 h2 {
+  font-size:25px;
   margin-top:10px;
   font-family:"HelveticaNeue-Light", "Helvetica", "Arial", "Sans-Serif";
   font-weight:normal;
+}
+
+p {
+  font-size:14px;
+  line-height:18px;
+  font-family:"HelveticaNeue-Light", "Helvetica", "Arial", "Sans-Serif";
+  font-weight:normal;
+    
 }

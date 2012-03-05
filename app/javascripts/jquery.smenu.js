@@ -19,6 +19,8 @@
                 var activation_area = $("<canvas class='smenu-menu-activiation-area' />");
                 $(activation_area).appendTo($this);
 
+                var clear = $("<div class='smenu-clear' />");
+                $(clear).appendTo($this);
 
                 var menu_open = false
 
@@ -44,7 +46,7 @@
 
                     var padding_difference = parseInt($(item).css("padding-left")) / 2;
 
-                    $(menu).css("left", $(item).position().left - padding_difference)
+                    $(menu).css("left", $(item).position().left)
                     $(menu).css("top", $(item).position().top + $(item).outerHeight(true) - 1)
 
                     $(item).siblings(".selected").removeClass("selected");

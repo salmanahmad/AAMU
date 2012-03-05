@@ -39,8 +39,8 @@ ul.smenu-menu {
   display:inline;
   border:1px solid #ccc;
   padding:5px 10px;
-  margin-left:-5px;
-  
+  margin-left:-1px;
+  float:left;
 }
 
 .smenu-menu-bar li {
@@ -70,4 +70,8 @@ ul.smenu-menu {
   height:0px;
   width:0px;
   display:none;
+}
+
+.smenu-clear {
+  clear:both;
 }
