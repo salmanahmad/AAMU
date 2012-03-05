@@ -1,0 +1,52 @@
+.aamu-menu-bar, .aamu-menu-bar * {
+  -moz-user-select: none;
+  -webkit-user-select: none
+}
+
+ul.aamu-menu-bar {
+  margin:0px;
+  padding:0px;
+  font-size:14px;
+  
+  position:relative;
+  background-color:white;
+}
+
+ul.aamu-menu {
+  border:1px solid #ccc;
+  padding:0px;
+  background-color:white;
+  
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:10;
+}
+
+.aamu-menu > li {
+  list-style: none;
+  border-bottom:1px solid #ccc;
+  padding:5px 10px;
+  position:relative;
+}
+
+.aamu-menu-bar > li {
+  display:inline;
+  border:1px solid #ccc;
+  padding:5px 10px;
+  margin-left:-5px;
+  
+}
+
+.aamu-menu-bar li {
+  cursor:pointer;
+}
+
+.aamu-menu-bar li.selected {
+  background-image: -webkit-linear-gradient(#eee, #ddd); 
+}
+
+.aamu-menu-bar > ul {
+  display:none;
+}
+
