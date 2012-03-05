@@ -1,1 +1,34 @@
-AAMU: Adaptive Activation Area Menus 
+Salman Ahmad
+
+6.831 UID - RS1 - AAMU: Adaptive Activation Area Menus 
+
+== Collaborators ==
+
+I had no collaborators. None. :-(
+
+== Source code ==
+
+The application was built as a jQuery plugin with modes for enabling AAMU and configuring menu time delays.
+
+All of the source code is contained within the /public directory. Alternatively, you can see the source on github: https://github.com/salmanahmad/AAMU.
+
+== Video URL ==
+
+Here ya' go:
+
+== Requirements ==
+
+This application is browser based. It has been tested in Chrome 17 and Safari 5.2 Beta on Mac OS X Lion. That being said, it should work on Windows and Firefox as well.
+
+== Instructions ==
+
+This project is currently hosted on heroku. 
+
+For a demo page: http://aamu.herokuapp.com/app.html
+
+For the actual experiment page: http://aamu.herokuapp.com/experiment.html
+
+Alternatively, you can run either page by double clicking on /public/app.html or /public/experiment.html and opening them in your browser. 
+
+You can see the the logged data by opening your browser's development console and inspecting the "records" variable. I have temporarily disabled server side logging because I didn't want the TAs to have to get Postgres up and running to play with the application.
+
