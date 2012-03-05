@@ -117,7 +117,7 @@
 
                     if (settings.aamu && $(menu).size() != 0) {
 
-                        if ($(activation_area).is(":visible")) {
+                        if ($(activation_area).is(":visible") && ($(activation_area_item)[0] == $(this)[0])) {
                             if (!settings.expand_activation_area) {
                                 return
                             }
