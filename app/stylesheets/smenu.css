@@ -64,3 +64,10 @@ ul.smenu-menu {
   font-size:20px;
   top:0px;
 }
+
+.smenu-menu-activiation-area {
+  position:absolute;
+  height:0px;
+  width:0px;
+  display:none;
+}

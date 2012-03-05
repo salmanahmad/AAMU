@@ -17,9 +17,20 @@
         
         var menu_html = $(".normal-menu").html()
         $(".aamu-menu").html(menu_html)
+        $(".aamu-expand-menu").html(menu_html)
+
         
         $(".normal-menu .smenu-menu-bar").smenu();
-        $(".aamu-menu .smenu-menu-bar").smenu({aamu:true});
+        $(".aamu-menu .smenu-menu-bar").smenu({
+          aamu:true
+        });
+        
+        $(".aamu-expand-menu .smenu-menu-bar").smenu({
+          aamu:true,
+          expand_activation_area: true
+        });
+        
+        
       })
     </script>
   </head>
@@ -124,6 +135,18 @@
         <h2>AAMU Menu</h2>
         
         <div class="aamu-menu"></div>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <h2>AAMU Menu - Expand Activation Area</h2>
+        
+        <div class="aamu-expand-menu"></div>
+        
+        
         
       </div>
       <div id="footer">
