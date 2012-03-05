@@ -48,3 +48,9 @@ body {
 #content {
   min-height:500px;
 }
+
+h2 {
+  margin-top:10px;
+  font-family:"HelveticaNeue-Light", "Helvetica", "Arial", "Sans-Serif";
+  font-weight:normal;
+}
