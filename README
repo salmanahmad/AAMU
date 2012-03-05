@@ -1,5 +1,11 @@
+sMenu: Super Menu
+
+Description
+
+This project also contains a fully functional JS menu (without the AAMU stuff). Feel free to fork! If you do something cool with it, Pull Requests are most welcome!
+
 TODO
 
 * Click off should close all of the menus
 * Add delays
-* Add submenus
+

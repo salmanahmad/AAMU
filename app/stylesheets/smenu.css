@@ -1,9 +1,9 @@
-.aamu-menu-bar, .aamu-menu-bar * {
+.smenu-menu-bar, .smenu-menu-bar * {
   -moz-user-select: none;
   -webkit-user-select: none
 }
 
-ul.aamu-menu-bar {
+ul.smenu-menu-bar {
   margin:0px;
   padding:0px;
   font-size:14px;
@@ -12,7 +12,7 @@ ul.aamu-menu-bar {
   background-color:white;
 }
 
-ul.aamu-menu {
+ul.smenu-menu {
   border:1px solid #ccc;
   padding:0px;
   background-color:white;
@@ -25,7 +25,7 @@ ul.aamu-menu {
   display:none;
 }
 
-.aamu-menu > li {
+.smenu-menu > li {
   list-style: none;
   border-bottom:1px solid #ccc;
   padding:5px 50px 5px 10px;
@@ -35,7 +35,7 @@ ul.aamu-menu {
 
 
 
-.aamu-menu-bar > li {
+.smenu-menu-bar > li {
   display:inline;
   border:1px solid #ccc;
   padding:5px 10px;
@@ -43,19 +43,19 @@ ul.aamu-menu {
   
 }
 
-.aamu-menu-bar li {
+.smenu-menu-bar li {
   cursor:pointer;
 }
 
-.aamu-menu-bar li.selected {
+.smenu-menu-bar li.selected {
   background-image: -webkit-linear-gradient(#eee, #ddd); 
 }
 
-.aamu-menu-bar > ul {
+.smenu-menu-bar > ul {
   display:none;
 }
 
-.aamu-item-expander {
+.smenu-item-expander {
   position:absolute;
   right:10px;
   height:100%;

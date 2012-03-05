@@ -10,17 +10,17 @@
       return this.each(function() {
          
         var $this = $(this);
-        var data = $this.data('aamu');
+        var data = $this.data('smenu');
         
         var menu_open = false
         
         function open_menu(item) {
-          $(item).siblings("ul.aamu-menu").hide()
+          $(item).siblings("ul.smenu-menu").hide()
           
           $(item).parent().find(".selected").removeClass("selected");
-          $(item).parent().find("ul.aamu-menu").hide();
+          $(item).parent().find("ul.smenu-menu").hide();
           
-          var menu = $(item).next("ul.aamu-menu");
+          var menu = $(item).next("ul.smenu-menu");
           $(menu).show();
           
           var padding_difference = parseInt($(item).css("padding-left")) / 2;
@@ -33,15 +33,15 @@
         }
         
         function close_menu(item) {
-          $(item).siblings("ul.aamu-menu").hide()
-          $(item).next("ul.aamu-menu").hide();
+          $(item).siblings("ul.smenu-menu").hide()
+          $(item).next("ul.smenu-menu").hide();
           $(item).removeClass("selected")
         }
         
         
         function expand_menu(item) {
           open_menu(item);
-          var menu = $(item).next("ul.aamu-menu");
+          var menu = $(item).next("ul.smenu-menu");
           if(menu) {
             var width = $(menu).width();
             $(menu).css("left", $(item).position().left + $(item).outerWidth(true))
@@ -54,10 +54,10 @@
           close_menu(item);
         }
         
-        $this.find("ul.aamu-menu li").each(function() {
+        $this.find("ul.smenu-menu li").each(function() {
           
-          if($(this).next().is("ul.aamu-menu")) {
-            var disclosure = $("<span class='aamu-item-expander'>&rsaquo;</span>")
+          if($(this).next().is("ul.smenu-menu")) {
+            var disclosure = $("<span class='smenu-item-expander'>&rsaquo;</span>")
             $(disclosure).appendTo($(this));
           }
         });
@@ -93,14 +93,14 @@
     }
   };
   
-  $.fn.menu = function(method) {
+  $.fn.smenu = function(method) {
     
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
     } else if (typeof method === 'object' || ! method) {
       return methods.init.apply(this, arguments);
     } else {
-      $.error('Method ' +  method + ' does not exist on jQuery.aamu');
+      $.error('Method ' +  method + ' does not exist on jQuery.smenu');
     }
   };
   
