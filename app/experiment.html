@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="stylesheets/page.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="stylesheets/smenu.css" type="text/css" media="screen" title="no title" charset="utf-8">
     
+    <style type="text/css" media="screen">
+      .marker {
+        background-color: #36B700 !important;
+        background-image:none !important;
+      }
+      
+      .target {
+        background-color:#BC2C2F !important;
+        background-image:none !important;
+      }
+      
+      #thanks {
+        display:none;
+      }
+      
+      #count {
+        display:none;
+      }
+    </style>
+    
     <script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
 
 <script src="javascripts/jquery.smenu.js" type="text/javascript" charset="utf-8"></script>
@@ -35,7 +55,6 @@
           if(Math.random() <= 0.5) {
             have_picked_one = true
             selected_items.push($(this))
-            //$(this).css("background-color", "red")
           }
         })
         
@@ -43,7 +62,6 @@
           var index = randomNumber(0, $(items).size())
           var item = $(items)[index]
           selected_items.push($(item))
-          //$(item).css("background-color", "red")
         }
         
         for(var i in selected_items) {
@@ -57,7 +75,6 @@
           
           $(menu).insertAfter(item)
           generateMenuDepth(depth - 1, $(menu).children())
-          
         }
       }
       
@@ -80,26 +97,104 @@
         
         var size = $(menu).children("ul").size();
         
-        
         if(size == 0) {
           var size = $(menu).children("li").size();
           var index = randomNumber(0, size)
           var item = $(menu).children("li")[index]
-          $(item).css("background-color", "red")
+          $(item).addClass("target")
           
         } else {
           var index = randomNumber(0, size)
           var menu = $(menu).children("ul")[index]
-          $(menu).prev("li").css("background-color", "green")
+          $(menu).prev("li").addClass("marker")
           createMenuPath($(menu))
         }
+      }
+      
+      var records = []
+      var experiment_running = false
+      var time_start = null
+      var time_end = null
+      
+      var aamu_trials = [false, true]
+      var aamu_trials_index = 0
+      
+      var depth_trials = [2, 3, 4]
+      var depth_trials_index = 0
+      
+      var trials = [0,1,2,3,4,5,6,7,8,9]
+      var trials_index = -1
+      
+      var global_count = 60;
+      var global_index = 0;
+      
+      function step() {
+        trials_index++;
+        if(trials_index >= trials.length) {
+          trials_index = 0;
+          depth_trials_index++;
+          if(depth_trials_index >= depth_trials.length) {
+            depth_trials_index = 0;
+            aamu_trials_index++;
+            if(aamu_trials_index >= aamu_trials.length) {
+              $(".menu .smenu-menu-bar").remove();
+              $("#count").hide();
+              $("#thanks").show();
+              return
+            }
+          }
+        }
+        
+        global_index++
+        $("#count #index").html(global_index)
+        
+        var aamu = aamu_trials[aamu_trials_index]
+        var depth = depth_trials[depth_trials_index]
+        createMenu(depth);
+        $(".menu .smenu-menu-bar").smenu({
+          aamu: aamu
+        });
         
       }
       
       $(function() {
         
-        createMenu(3);
+        $(".target").live('click', function() {
+          if(experiment_running) {
+            
+            time_end = (new Date()).getTime()
+            var duration = time_end - time_start
+            
+            var record = {
+              duration: duration,
+              aamu: aamu_trials[aamu_trials_index],
+              depth: depth_trials[depth_trials_index],
+              trial: trials_index
+            }
+            
+            records.push(record)
+            console.log(records);
+            
+            step();
+          } else {
+            createMenu(3);
+            $(".menu .smenu-menu-bar").smenu();
+          }
+        });
         
+        $(".smenu-menu-bar > li").live('click', function() {
+          time_start = (new Date()).getTime()
+        });
+        
+        
+        $("#start").click(function() {
+          experiment_running = true
+          $("#start").hide()
+          $("#count").show()
+          step()
+        });
+        
+        createMenu(3);
         $(".menu .smenu-menu-bar").smenu();
       })
     </script>
@@ -121,9 +216,20 @@
         
         <p>You can practice using the interface below. These tasks will not be recorded. Once you are comfortable with the interface, click the "Begin Experiment" button to start.</p>
         
-        <h2>Interface</h2>
+        <h2>
+          Interface - <a href="#" class="link" id="start">Start Experiment</a>
+          <span id="count">
+            <span id="index">1</span>
+            of
+            <span id="max">60</span>
+          </span>
+        </h2>
         
         <div class="menu"></div>
+        
+        <p id="thanks">
+          Thank you for your participation. Your results have been saved. You can safely close your browser window.
+        </p>
         
       </div>
       <div id="footer">
