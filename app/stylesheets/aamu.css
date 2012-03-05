@@ -21,14 +21,19 @@ ul.aamu-menu {
   left:0px;
   top:0px;
   z-index:10;
+  
+  display:none;
 }
 
 .aamu-menu > li {
   list-style: none;
   border-bottom:1px solid #ccc;
-  padding:5px 10px;
+  padding:5px 50px 5px 10px;
   position:relative;
+  min-width:100px;
 }
+
+
 
 .aamu-menu-bar > li {
   display:inline;
@@ -50,3 +55,12 @@ ul.aamu-menu {
   display:none;
 }
 
+.aamu-item-expander {
+  position:absolute;
+  right:10px;
+  height:100%;
+  line-height:100%;
+  font-family:"Helvetica";
+  font-size:20px;
+  top:0px;
+}

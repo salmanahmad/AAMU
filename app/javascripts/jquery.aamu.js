@@ -17,14 +17,13 @@
         function open_menu(item) {
           $(item).siblings("ul.aamu-menu").hide()
           
+          $(item).parent().find(".selected").removeClass("selected");
+          $(item).parent().find("ul.aamu-menu").hide();
           
           var menu = $(item).next("ul.aamu-menu");
           $(menu).show();
           
-          
-          
           var padding_difference = parseInt($(item).css("padding-left")) / 2;
-          
           
           $(menu).css("left", $(item).position().left - padding_difference)
           $(menu).css("top", $(item).position().top + $(item).outerHeight(true) - 1)
@@ -40,6 +39,30 @@
         }
         
         
+        function expand_menu(item) {
+          open_menu(item);
+          var menu = $(item).next("ul.aamu-menu");
+          if(menu) {
+            var width = $(menu).width();
+            $(menu).css("left", $(item).position().left + $(item).outerWidth(true))
+            $(menu).css("top", $(item).position().top - 1)
+            $(menu).css("width", width)
+          }
+        }
+        
+        function collapse_menu(item) {
+          close_menu(item);
+        }
+        
+        $this.find("ul.aamu-menu li").each(function() {
+          
+          if($(this).next().is("ul.aamu-menu")) {
+            var disclosure = $("<span class='aamu-item-expander'>&rsaquo;</span>")
+            $(disclosure).appendTo($(this));
+          }
+        });
+        
+        
         $this.children("li").click(function() {
           if($(this).is(".selected")) {
             close_menu(this)
@@ -52,23 +75,25 @@
         
         $this.children("li").hover(function() {
           if(menu_open) {
-            $(this).siblings(".selected").removeClass("selected")
-            $(this).addClass("selected");
             open_menu(this);
           }
         })
+        
+        $this.find("ul li").hover(function() {
+          expand_menu(this)
+        });
        
       });
     },
      
     destroy : function( ) {
       return this.each(function(){
-        
+        // TODO... Or not...
       })
     }
   };
   
-  $.fn.aamu = function(method) {
+  $.fn.menu = function(method) {
     
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
