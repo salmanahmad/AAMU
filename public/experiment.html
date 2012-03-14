@@ -223,7 +223,8 @@
         });
         
         createMenu(3);
-        $(".menu .smenu-menu-bar").smenu();
+        var aamu = Math.random() < 0.5;
+        $(".menu .smenu-menu-bar").smenu({aamu: aamu});
       })
     </script>
   </head>
