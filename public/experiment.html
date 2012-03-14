@@ -154,6 +154,8 @@
       
       function step() {
         
+        time_start = null;
+        
         trials_index++
         $("#count #index").html(trials_index + 1)
         
@@ -206,7 +208,9 @@
         });
         
         $(".smenu-menu-bar > li").live('click', function() {
-          time_start = (new Date()).getTime()
+          if (time_start == null) {
+            time_start = (new Date()).getTime()
+          }
         });
         
         
