@@ -129,10 +129,24 @@
         for(var i = 0; i < 2; i++) {
           for(var j = 0; j < 3; j++) {
             for(var k = 0; k < 10; k++) {
-              var t = new trial(j + 2, (i == 0))
+              var t = new trial(j + 2, (i == 1))
               trials.push(t)
             }
           }
+        }
+        
+        var controlled_trials = trials.slice(0,30); 
+        var aamu_trials = trials.slice(30); 
+        
+        controlled_trials.sort(function() {return 0.5 - Math.random()})
+        aamu_trials.sort(function() {return 0.5 - Math.random()})
+        
+        trials = []
+             
+        if (Math.random() < 0.5) {
+          trials = trials.concat(aamu_trials, controlled_trials)
+        } else {
+          trials = trials.concat(controlled_trials, aamu_trials)
         }
         
         trials_index = -1;
