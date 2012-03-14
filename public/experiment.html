@@ -28,8 +28,8 @@
     </style>
     
     <script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
-
-<script src="javascripts/jquery.smenu.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascripts/json2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascripts/jquery.smenu.js" type="text/javascript" charset="utf-8"></script>
 
 
     <script type="text/javascript" charset="utf-8">
@@ -111,49 +111,62 @@
         }
       }
       
-      var records = []
+      function trial(depth, aamu) {
+        this.depth = depth
+        this.aamu = aamu
+        this.duration = -1
+      }
+      
+      var trials = []
+      var trials_index = -1
+      
       var experiment_running = false
       var time_start = null
       var time_end = null
       
-      var aamu_trials = [false, true]
-      var aamu_trials_index = 0
-      
-      var depth_trials = [2, 3, 4]
-      var depth_trials_index = 0
-      
-      var trials = [0,1,2,3,4,5,6,7,8,9]
-      var trials_index = -1
-      
-      var global_count = 60;
-      var global_index = 0;
-      
-      function step() {
-        trials_index++;
-        if(trials_index >= trials.length) {
-          trials_index = 0;
-          depth_trials_index++;
-          if(depth_trials_index >= depth_trials.length) {
-            depth_trials_index = 0;
-            aamu_trials_index++;
-            if(aamu_trials_index >= aamu_trials.length) {
-              $(".menu .smenu-menu-bar").remove();
-              $("#count").hide();
-              $("#thanks").show();
-              return
+      function setup() {
+        
+        for(var i = 0; i < 2; i++) {
+          for(var j = 0; j < 3; j++) {
+            for(var k = 0; k < 10; k++) {
+              var t = new trial(j + 2, (i == 0))
+              trials.push(t)
             }
           }
         }
         
-        global_index++
-        $("#count #index").html(global_index)
+        trials_index = -1;
+      }
+      
+      function step() {
         
-        var aamu = aamu_trials[aamu_trials_index]
-        var depth = depth_trials[depth_trials_index]
-        createMenu(depth);
-        $(".menu .smenu-menu-bar").smenu({
-          aamu: aamu
-        });
+        trials_index++
+        $("#count #index").html(trials_index + 1)
+        
+        if (trials_index < trials.length) {
+          var t = trials[trials_index]
+          
+          createMenu(t.depth)
+          $(".menu .smenu-menu-bar").smenu({
+            aamu: t.aamu
+          });
+        } else {
+          $(".menu .smenu-menu-bar").remove();
+          $("#count").hide();
+          $("#thanks").show();
+          var data = JSON.stringify(trials)
+          var request = $.post("/trials.json", {
+            data: data
+          })
+          
+          request.success(function() { 
+            alert("Thank you! Your responses have been saved.")
+          })
+          
+          request.error(function() { 
+            alert("There was an error saving your results. Please tell Salman. Do not close the browser. Thanks!"); 
+          });
+        }
         
       }
       
@@ -165,20 +178,16 @@
             time_end = (new Date()).getTime()
             var duration = time_end - time_start
             
-            var record = {
-              duration: duration,
-              aamu: aamu_trials[aamu_trials_index],
-              depth: depth_trials[depth_trials_index],
-              trial: trials_index
-            }
+            var t = trials[trials_index]
+            t.duration = duration
             
-            records.push(record)
-            console.log(records);
+            console.log(t);
             
             step();
           } else {
             createMenu(3);
-            $(".menu .smenu-menu-bar").smenu();
+            var aamu = Math.random() < 0.5;
+            $(".menu .smenu-menu-bar").smenu({aamu: aamu});
           }
         });
         
@@ -191,6 +200,7 @@
           experiment_running = true
           $("#start").hide()
           $("#count").show()
+          setup()
           step()
         });
         
